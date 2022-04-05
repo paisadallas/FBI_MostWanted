@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Item(
     @SerializedName("items")
-    val items: List<ItemX>,
+    val items: List<Criminals>,
     @SerializedName("page")
     val page: Int,
     @SerializedName("total")

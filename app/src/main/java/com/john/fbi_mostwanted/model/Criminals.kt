@@ -3,7 +3,7 @@ package com.john.fbi_mostwanted.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ItemX(
+data class Criminals(
     @SerializedName("additional_information")
     val additionalInformation: Any,
     @SerializedName("age_max")
