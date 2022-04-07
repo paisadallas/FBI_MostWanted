@@ -5,18 +5,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.john.fbi_mostwanted.R
+import com.john.fbi_mostwanted.databinding.FragmentListBinding
+import com.john.fbi_mostwanted.utils.FbiState
 
-class ListFragment : Fragment() {
+class ListFragment : BaseFragment() {
 
-
+    private val binding by lazy {
+        FragmentListBinding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+
+        fbiViewModel.getAllList()
+        fbiViewModel.fbi.observe(viewLifecycleOwner){
+            when(it){
+                FbiState.LOADING ->{
+
+                }
+              is  FbiState.SUCCESS <*> ->{
+
+                }
+                is FbiState.ERROR -> {
+                    Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        }
+
+       return (binding.root)
     }
 
 }

@@ -2,25 +2,26 @@ package com.john.fbi_mostwanted.di
 
 import android.content.Context
 import androidx.room.Room
-import com.john.fbi_mostwanted.database.DatabaseRepository
-import com.john.fbi_mostwanted.database.DatabaseRepositoryImpl
-import com.john.fbi_mostwanted.database.ItemDao
-import com.john.fbi_mostwanted.database.ItemDatabase
+import com.john.fbi_mostwanted.database.*
 import com.john.fbi_mostwanted.res.FbiApi
 import com.john.fbi_mostwanted.res.FbiRepository
 import com.john.fbi_mostwanted.res.FbiRepositoryImpl
+import com.john.fbi_mostwanted.viewmodel.FbiViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 val networkModule = module {
 
-    fun providesLoggingInterceptors():HttpLoggingInterceptor =
+    fun providesLoggingInterceptors(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
+            level = HttpLoggingInterceptor.Level.BODY
         }
 
     fun providesHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor):OkHttpClient =
@@ -31,7 +32,7 @@ val networkModule = module {
             .writeTimeout(30,TimeUnit.SECONDS)
             .build()
 
-    fun providesNetworkServices(okHttpClient: OkHttpClient):FbiApi =
+    fun providesNetworkServices(okHttpClient: OkHttpClient): FbiApi =
         Retrofit.Builder()
             .baseUrl(FbiApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -39,31 +40,36 @@ val networkModule = module {
             .build()
             .create(FbiApi::class.java)
 
-    fun providesFbiRepo(networkServices:FbiApi): FbiRepository =
+    fun providesJokeRepo(networkServices:FbiApi):FbiRepository =
         FbiRepositoryImpl(networkServices)
 
     single { providesLoggingInterceptors() }
     single { providesHttpClient(get()) }
-    single {providesNetworkServices(get())}
-    single {providesFbiRepo(get())}
+    single { providesNetworkServices(get()) }
+    single { providesJokeRepo(get()) }
 }
 
 val applicationModule = module {
 
-    fun providesFbiDatabase(context: Context): ItemDatabase =
+    fun providesJokeDatabase(context: Context): ItemDatabase =
         Room.databaseBuilder(
             context,
             ItemDatabase::class.java,
-            "fbi-db"
+            "joke-db"
         ).build()
 
-    fun providesDatabaseDao(itemDatabase: ItemDatabase): ItemDao =
-        itemDatabase.getDao()
+    fun providesDatabaseDao(jokeDatabase: ItemDatabase): ItemDao =
+        jokeDatabase.getDao()
 
-    fun provideDatabaseRepository(itemDao: ItemDao):DatabaseRepository =
-        DatabaseRepositoryImpl(itemDao)
+    fun providesDatabaseRepository(databaseDao:ItemDao):DatabaseRepository =
+        DatabaseRepositoryImpl(databaseDao)
+
+    single { providesJokeDatabase(androidContext()) }
+    single { providesDatabaseDao(get()) }
+    single { providesDatabaseRepository(get()) }
+
 }
 
-//val viewModelModule = module{
-//    viewModel {  }
-//}
+val viewModelModule = module {
+    viewModel {FbiViewModel(get(),get())}
+}
