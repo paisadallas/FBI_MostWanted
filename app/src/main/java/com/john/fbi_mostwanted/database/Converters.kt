@@ -13,5 +13,4 @@ class Converters {
     fun fromListOfStrings(listOfString: List<String>): String {
         return listOfString.joinToString(",")
     }
-
 }
