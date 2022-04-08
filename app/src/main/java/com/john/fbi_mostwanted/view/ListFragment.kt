@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.john.fbi_mostwanted.R
 import com.john.fbi_mostwanted.databinding.FragmentListBinding
+import com.john.fbi_mostwanted.model.Criminals
 import com.john.fbi_mostwanted.utils.FbiState
 
 class ListFragment : BaseFragment() {
@@ -22,6 +24,12 @@ class ListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding.rvList.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
+            adapter = peopleAdapter
+        }
+
         fbiViewModel.getAllList()
         fbiViewModel.fbi.observe(viewLifecycleOwner){
             when(it){
@@ -29,7 +37,9 @@ class ListFragment : BaseFragment() {
 
                 }
               is  FbiState.SUCCESS <*> ->{
+                    var listItem = it?.criminal as Criminals
 
+                  peopleAdapter.update(listItem?.items)
                 }
                 is FbiState.ERROR -> {
                     Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_LONG)

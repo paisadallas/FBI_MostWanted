@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.john.fbi_mostwanted.database.DatabaseRepository
+import com.john.fbi_mostwanted.model.Criminals
+import com.john.fbi_mostwanted.model.Item
 import com.john.fbi_mostwanted.res.FbiRepository
 import com.john.fbi_mostwanted.utils.FbiState
 import kotlinx.coroutines.CoroutineDispatcher
@@ -32,8 +34,9 @@ class FbiViewModel(
                     Log.d("MY_DATA","SUCCESSFUL")
                     response.body()?.let {
                      //   Log.d("MY_DATA",it.toString())
-                        var myObjet = it.items
-                        Log.d("MY_DATA",myObjet[1].description)
+
+                        //Log.d("MY_DATA",myObjet.description)
+                        _sortedFbi.postValue(FbiState.SUCCESS(it))
                     }
                 }else{
                     throw Exception("response null")
