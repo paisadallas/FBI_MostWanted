@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Image(
     @SerializedName("caption")
-    val caption: Any,
+    val caption: Any?,
     @SerializedName("large")
     val large: String,
     @SerializedName("original")

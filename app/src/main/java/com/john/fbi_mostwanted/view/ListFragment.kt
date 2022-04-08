@@ -1,6 +1,7 @@
 package com.john.fbi_mostwanted.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,8 @@ class ListFragment : BaseFragment() {
                 is FbiState.ERROR -> {
                     Toast.makeText(requireContext(), it.error.localizedMessage, Toast.LENGTH_LONG)
                         .show()
+
+                    Log.d("MY_DATA_ERROR",it.error.localizedMessage)
                 }
             }
         }

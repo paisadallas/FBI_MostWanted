@@ -5,8 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
-import com.john.fbi_mostwanted.database.Converters
-
 @Entity
 @TypeConverters(Converters::class)
 data class Item(
@@ -19,7 +17,7 @@ data class Item(
     @SerializedName("age_range")
     val ageRange: String?,
     @SerializedName("aliases")
-    val aliases: String?,
+    val aliases: List<String?>,
     @SerializedName("build")
     val build: String?,
     @SerializedName("caution")
@@ -29,32 +27,32 @@ data class Item(
     @SerializedName("coordinates")
     val coordinates: List<String?>,
     @SerializedName("dates_of_birth_used")
-    val datesOfBirthUsed: String?,
+    val datesOfBirthUsed: List<String?>,
     @SerializedName("description")
     val description: String,
     @SerializedName("details")
-    val details: String,
+    val details: String?,
     @SerializedName("eyes")
     val eyes: String?,
     @SerializedName("eyes_raw")
     val eyesRaw: String?,
     @SerializedName("field_offices")
-    val fieldOffices: List<String>,
+    val fieldOffices: List<String?>,
     @SerializedName("files")
-    val files: List<String>,
+    val files: List<File>,
     @SerializedName("hair")
-    val hair: String,
+    val hair: String?,
     @SerializedName("hair_raw")
-    val hairRaw: String,
+    val hairRaw: String?,
     @SerializedName("height_max")
-    val heightMax: Int?,
+    val heightMax: String?,
     @SerializedName("height_min")
-    val heightMin: Int?,
+    val heightMin: String?,
     @SerializedName("@id")
     @PrimaryKey
     val id: String,
     @SerializedName("images")
-    val images: List<String?>,
+    val images: List<Image?>,
     @SerializedName("languages")
     val languages: String?,
     @SerializedName("legat_names")
@@ -68,7 +66,7 @@ data class Item(
     @SerializedName("ncic")
     val ncic: String?,
     @SerializedName("occupations")
-    val occupations: String?,
+    val occupations: List<String?>,
     @SerializedName("path")
     val path: String,
     @SerializedName("person_classification")
@@ -82,21 +80,21 @@ data class Item(
     @SerializedName("publication")
     val publication: String,
     @SerializedName("race")
-    val race: String,
+    val race: String?,
     @SerializedName("race_raw")
-    val raceRaw: String,
+    val raceRaw: String?,
     @SerializedName("remarks")
     val remarks: String?,
     @SerializedName("reward_max")
-    val rewardMax: Int,
+    val rewardMax: Int?,
     @SerializedName("reward_min")
-    val rewardMin: Int,
+    val rewardMin: Int?,
     @SerializedName("reward_text")
     val rewardText: String?,
     @SerializedName("scars_and_marks")
     val scarsAndMarks: String?,
     @SerializedName("sex")
-    val sex: String,
+    val sex: String?,
     @SerializedName("status")
     val status: String,
     @SerializedName("subjects")
@@ -112,7 +110,7 @@ data class Item(
     @SerializedName("warning_message")
     val warningMessage: String?,
     @SerializedName("weight")
-    val weight: Int?,
+    val weight: String?,
     @SerializedName("weight_max")
     val weightMax: Int?,
     @SerializedName("weight_min")

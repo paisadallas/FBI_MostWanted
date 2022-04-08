@@ -1,5 +1,6 @@
 package com.john.fbi_mostwanted.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,11 +25,16 @@ class FbiViewModel(
     fun getAllList(){
         viewModelScope.launch (ioDispatcher){
             try {
+                Log.d("MY_DATA","ENTRY 1")
                 val response  = fbiNetwork.getAllData()
+                Log.d("MY_DATA","ENTRY 2")
                 if (response.isSuccessful){
-                        response.body().let {
-
-                        }
+                    Log.d("MY_DATA","SUCCESSFUL")
+                    response.body()?.let {
+                     //   Log.d("MY_DATA",it.toString())
+                        var myObjet = it.items
+                        Log.d("MY_DATA",myObjet[1].description)
+                    }
                 }else{
                     throw Exception("response null")
                 }

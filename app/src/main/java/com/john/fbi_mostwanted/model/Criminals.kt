@@ -1,10 +1,7 @@
 package com.john.fbi_mostwanted.model
 
 
-
 import com.google.gson.annotations.SerializedName
-
-
 
 data class Criminals(
     @SerializedName("items")
