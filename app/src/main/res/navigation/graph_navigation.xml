@@ -18,5 +18,9 @@
         android:id="@+id/descriptionFragment"
         android:name="com.john.fbi_mostwanted.view.DescriptionFragment"
         android:label="fragment_description"
-        tools:layout="@layout/fragment_description" />
+        tools:layout="@layout/fragment_description" >
+        <argument
+            android:name="criminal"
+            app:argType="string[]" />
+    </fragment>
 </navigation>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".view.DescriptionFragment">
 
 
@@ -13,6 +14,7 @@
 
         <ImageView
             android:id="@+id/img_face"
+            android:layout_marginTop="@dimen/margin_top"
             android:src="@drawable/ic_launcher_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -21,6 +23,9 @@
             android:textAlignment="center"
             android:id="@+id/tv_title"
             android:text="Name"
+            android:textSize="30sp"
+            android:layout_margin="@dimen/margin_card"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -28,11 +33,11 @@
             android:textAlignment="center"
             android:id="@+id/tv_description"
             android:text="Description"
+            android:layout_margin="@dimen/margin_description"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
-
 
 </FrameLayout>

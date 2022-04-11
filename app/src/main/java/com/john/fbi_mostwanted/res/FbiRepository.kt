@@ -1,8 +1,6 @@
 package com.john.fbi_mostwanted.res
 
 import com.john.fbi_mostwanted.model.Criminals
-import com.john.fbi_mostwanted.model.Item
-import com.john.fbi_mostwanted.model.JokeList
 import retrofit2.Response
 
 

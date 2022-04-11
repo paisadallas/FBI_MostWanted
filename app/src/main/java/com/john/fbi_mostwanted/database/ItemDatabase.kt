@@ -2,9 +2,7 @@ package com.john.fbi_mostwanted.database
 
 import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
-import com.john.fbi_mostwanted.model.Criminals
 import com.john.fbi_mostwanted.model.Item
-import com.john.fbi_mostwanted.model.Value
 
 
 @Database(
