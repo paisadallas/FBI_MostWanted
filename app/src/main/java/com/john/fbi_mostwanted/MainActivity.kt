@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
    setSupportActionBar(findViewById(R.id.my_tool))
 
         setContentView(binding.root)
