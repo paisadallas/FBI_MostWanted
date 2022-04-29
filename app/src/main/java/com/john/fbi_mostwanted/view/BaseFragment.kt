@@ -10,4 +10,8 @@ open abstract class BaseFragment : Fragment() {
 
     protected val fbiViewModel: FbiViewModel by sharedViewModel()
 
+    //    private val sss by lazy {
+//        ViewModelProvider(requireActivity())[SchoolViewModel::class.java]
+//    }
+
 }

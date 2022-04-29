@@ -20,9 +20,6 @@ import com.john.fbi_mostwanted.utils.FbiState
 
 class ListFragment : BaseFragment() {
 
-
-
-
     private val binding by lazy {
         FragmentListBinding.inflate(layoutInflater)
     }

@@ -33,9 +33,7 @@ class FbiViewModel(
                 if (response.isSuccessful){
                     Log.d("MY_DATA","SUCCESSFUL")
                     response.body()?.let {
-                     //   Log.d("MY_DATA",it.toString())
 
-                        //Log.d("MY_DATA",myObjet.description)
                         _sortedFbi.postValue(FbiState.SUCCESS(it))
                     }
                 }else{
